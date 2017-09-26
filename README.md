@@ -83,6 +83,7 @@ extensions:
       - html
       #- clover
       #- php
+      #- xml
     #
     # Specify output file/directory where code coverage report will be
     # generated. You can configure different output file/directory per
@@ -92,6 +93,7 @@ extensions:
       html: coverage
       #clover: coverage.xml
       #php: coverage.php
+      #xml: coverage
     #
     # Should uncovered files be included in the reports?
     # Default: true
