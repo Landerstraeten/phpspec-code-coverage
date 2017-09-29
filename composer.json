@@ -1,5 +1,5 @@
 {
-    "name": "leanphp/phpspec-code-coverage",
+    "name": "landerstraeten/phpspec-code-coverage",
     "description": "Generate Code Coverage reports for PhpSpec tests",
     "type": "library",
     "keywords": [
