@@ -1,6 +1,5 @@
-# phpspec.yml
-# leanphp/phpspec-code-coverage
 formatter.name: pretty
+
 suites:
     default_suite:
         namespace: LeanPHP\PhpSpec\CodeCoverage
@@ -13,7 +12,9 @@ extensions:
       - clover
       - php
       - text
+      - xml
     output:
       html: build/coverage
       clover: build/coverage.xml
       php: build/coverage.php
+      xml: build/coverage

@@ -1,11 +1,6 @@
 phpspec-code-coverage
 =====================
-[![License](https://img.shields.io/packagist/l/leanphp/phpspec-code-coverage.svg?style=flat-square)](#LICENSE)
-[![Latest Stable Version](https://img.shields.io/packagist/v/leanphp/phpspec-code-coverage.svg?style=flat-square)](https://packagist.org/packages/leanphp/phpspec-code-coverage)
-[![Total Downloads](https://img.shields.io/packagist/dt/leanphp/phpspec-code-coverage.svg?style=flat-square)](https://packagist.org/packages/leanphp/phpspec-code-coverage)
-[![Travis](https://img.shields.io/travis/leanphp/phpspec-code-coverage.svg?style=flat-square)](https://travis-ci.org/leanphp/phpspec-code-coverage)
-[![AppVeyor](https://img.shields.io/appveyor/ci/leanphp/phpspec-code-coverage/master.svg?style=flat-square)](https://ci.appveyor.com/project/leanphp/phpspec-code-coverage)
-[![Pre Release](https://img.shields.io/packagist/vpre/leanphp/phpspec-code-coverage.svg?style=flat-square)](https://packagist.org/packages/leanphp/phpspec-code-coverage)
+[![Travis](https://img.shields.io/travis/Landerstraeten/phpspec-code-coverage.svg?style=flat-square)](https://travis-ci.org/Landerstraeten/phpspec-code-coverage)
 
 [phpspec-code-coverage][0] is a [PhpSpec][2] extension that generates Code
 Coverage reports for [PhpSpec][2] tests.
@@ -19,10 +14,9 @@ package with compatible version numbers for stable releases.
 
 ## Requirements
 
-- PHP 5.6+ or PHP 7+
-- [Xdebug][3] or [phpdbg][4] extension enabled (PHP 7+ is required for code
-  generation to work with [phpdbg][4]).
-- [PhpSpec v3 or v4][2]
+-  PHP 7+
+- [Xdebug][3] or [phpdbg][4]
+- [PhpSpec v4][2]
 
 ## Change Log
 
