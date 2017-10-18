@@ -17,7 +17,7 @@ class CodeCoverageListenerSpec extends ObjectBehavior
 {
     function let(ConsoleIO $io, CodeCoverage $coverage)
     {
-        $this->beConstructedWith($io, $coverage, array());
+        $this->beConstructedWith($io, $coverage, []);
     }
 
     function it_is_initializable()
@@ -25,32 +25,45 @@ class CodeCoverageListenerSpec extends ObjectBehavior
         $this->shouldHaveType('LeanPHP\PhpSpec\CodeCoverage\Listener\CodeCoverageListener');
     }
 
-
     function it_should_run_all_reports(
         CodeCoverage $coverage,
+        Report\Html\Facade $html,
         Report\Clover $clover,
         Report\PHP $php,
+        Report\Xml\Facade $xml,
         SuiteEvent $event,
         ConsoleIO $io
     ) {
-        $reports = array(
+        $reports = [
+            'html' => $html,
             'clover' => $clover,
-            'php' =>  $php
-        );
+            'xml' => $xml,
+            'php' =>  $php,
+        ];
 
         $io->isVerbose()->willReturn(false);
 
         $this->beConstructedWith($io, $coverage, $reports);
-        $this->setOptions(array(
-            'format' => array('clover', 'php'),
-            'output' => array(
+        $this->setOptions([
+            'format' => [
+                'text',
+                'html',
+                'clover',
+                'php',
+                'xml',
+            ],
+            'output' => [
+                'html' => 'coverage',
                 'clover' => 'coverage.xml',
-                'php' => 'coverage.php'
-            )
-        ));
+                'php' => 'coverage.php',
+                'xml' => 'coverage',
+            ],
+        ]);
 
         $clover->process($coverage, 'coverage.xml')->shouldBeCalled();
+        $html->process($coverage, 'coverage')->shouldBeCalled();
         $php->process($coverage, 'coverage.php')->shouldBeCalled();
+        $xml->process($coverage, 'coverage')->shouldBeCalled();
 
         $this->afterSuite($event);
     }
@@ -61,14 +74,14 @@ class CodeCoverageListenerSpec extends ObjectBehavior
         SuiteEvent $event,
         ConsoleIO $io
     ) {
-        $reports = array(
-            'text' => $text
-        );
+        $reports = [
+            'text' => $text,
+        ];
 
         $this->beConstructedWith($io, $coverage, $reports);
-        $this->setOptions(array(
-            'format' => 'text'
-        ));
+        $this->setOptions([
+            'format' => 'text',
+        ]);
 
         $io->isVerbose()->willReturn(false);
         $io->isDecorated()->willReturn(true);
@@ -85,14 +98,14 @@ class CodeCoverageListenerSpec extends ObjectBehavior
         SuiteEvent $event,
         ConsoleIO $io
     ) {
-        $reports = array(
-            'text' => $text
-        );
+        $reports = [
+            'text' => $text,
+        ];
 
         $this->beConstructedWith($io, $coverage, $reports);
-        $this->setOptions(array(
-            'format' => 'text'
-        ));
+        $this->setOptions([
+            'format' => 'text',
+        ]);
 
         $io->isVerbose()->willReturn(false);
         $io->isDecorated()->willReturn(false);
@@ -109,15 +122,17 @@ class CodeCoverageListenerSpec extends ObjectBehavior
         SuiteEvent $event,
         ConsoleIO $io
     ) {
-        $reports = array(
-            'html' => $html
-        );
+        $reports = [
+            'html' => $html,
+        ];
 
         $this->beConstructedWith($io, $coverage, $reports);
-        $this->setOptions(array(
+        $this->setOptions([
             'format' => 'html',
-            'output' => array('html' => 'coverage'),
-        ));
+            'output' => [
+                'html' => 'coverage',
+            ],
+        ]);
 
         $io->isVerbose()->willReturn(false);
         $io->writeln(Argument::any())->shouldNotBeCalled();
@@ -134,15 +149,17 @@ class CodeCoverageListenerSpec extends ObjectBehavior
         SuiteEvent $event,
         ConsoleIO $io
     ) {
-        $reports = array(
+        $reports = [
             'html' => $html,
-        );
+        ];
 
         $this->beConstructedWith($io, $coverage, $reports);
-        $this->setOptions(array(
+        $this->setOptions([
             'format' => 'html',
-            'output' => array('html' => 'coverage'),
-        ));
+            'output' => [
+                'html' => 'coverage',
+            ],
+        ]);
 
         $io->isVerbose()->willReturn(true);
         $io->writeln('')->shouldBeCalled();
@@ -158,16 +175,16 @@ class CodeCoverageListenerSpec extends ObjectBehavior
         ConsoleIO $io
     )
     {
-        $this->beConstructedWith($io, $coverage, array());
+        $this->beConstructedWith($io, $coverage, []);
 
         $coverage->filter()->willReturn($filter);
 
-        $this->setOptions(array(
-            'whitelist' => array('src'),
-            'blacklist' => array('src/filter'),
-            'whitelist_files' => array('src/filter/whilelisted_file'),
-            'blacklist_files' => array('src/filtered_file')
-        ));
+        $this->setOptions([
+            'whitelist' => ['src'],
+            'blacklist' => ['src/filter'],
+            'whitelist_files' => ['src/filter/whilelisted_file'],
+            'blacklist_files' => ['src/filtered_file'],
+        ]);
 
         $filter->addDirectoryToWhitelist('src')->shouldBeCalled();
         $filter->removeDirectoryFromWhitelist('src/filter')->shouldBeCalled();

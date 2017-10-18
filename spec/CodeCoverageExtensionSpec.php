@@ -4,7 +4,6 @@ namespace spec\LeanPHP\PhpSpec\CodeCoverage;
 
 use PhpSpec\ObjectBehavior;
 use PhpSpec\ServiceContainer\IndexedServiceContainer;
-use Prophecy\Argument;
 
 /**
  * @author Henrik Bjornskov
@@ -22,26 +21,26 @@ class CodeCoverageExtensionSpec extends ObjectBehavior
         $this->load($container, []);
 
         $options = $container->get('code_coverage.options');
-        expect($options['format'])->toBe(array('html'));
+        expect($options['format'])->toBe(['html']);
     }
 
     function it_should_transform_format_into_array()
     {
         $container = new IndexedServiceContainer;
-        $container->setParam('code_coverage', array('format' => 'html'));
+        $container->setParam('code_coverage', ['format' => 'html']);
         $this->load($container);
 
         $options = $container->get('code_coverage.options');
-        expect($options['format'])->toBe(array('html'));
+        expect($options['format'])->toBe(['html']);
     }
 
     function it_should_use_singular_output()
     {
         $container = new IndexedServiceContainer;
-        $container->setParam('code_coverage', array('output' => 'test', 'format' => 'foo'));
+        $container->setParam('code_coverage', ['output' => 'test', 'format' => 'foo']);
         $this->load($container);
 
         $options = $container->get('code_coverage.options');
-        expect($options['output'])->toBe(array('foo' => 'test'));
+        expect($options['output'])->toBe(['foo' => 'test']);
     }
 }

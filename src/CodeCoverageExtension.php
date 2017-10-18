@@ -65,28 +65,25 @@ class CodeCoverageExtension implements \PhpSpec\Extension
             $reports = array();
             foreach ($options['format'] as $format) {
                 switch ($format) {
+                    case 'text':
+                        $reports['text'] =  new Report\Text(
+                            $options['lower_upper_bound'],
+                            $options['high_lower_bound'],
+                            $options['show_uncovered_files'],
+                            false
+                        );
+                        break;
+                    case 'html':
+                        $reports['html'] = new Report\Html\Facade();
+                        break;
                     case 'clover':
                         $reports['clover'] = new Report\Clover();
                         break;
                     case 'php':
                         $reports['php'] =  new Report\PHP();
                         break;
-                    case 'text':
-                        $reports['text'] =  new Report\Text(
-                            $options['lower_upper_bound'],
-                            $options['high_lower_bound'],
-                            $options['show_uncovered_files'],
-                            /* $showOnlySummary */ false
-                        );
-                        break;
                     case 'xml':
                         $reports['xml'] =  new Report\Xml\Facade(Version::id());
-                        break;
-                    case 'crap4j':
-                        $reports['crap4j'] = new Report\Crap4j();
-                        break;
-                    case 'html':
-                        $reports['html'] = new Report\Html\Facade();
                         break;
                 }
             }
